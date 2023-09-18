@@ -1,12 +1,3 @@
-# Own base project
+# Rush Industry 2
 
-Base JS front-end project for personal boilerplate.
-
-Included features:
-- React
-- ESLint
-- TypeScript
-- webpack server
-- SCSS
-- Prettier
-- Redux
+Simple arcade economic game. Get most points to win.
