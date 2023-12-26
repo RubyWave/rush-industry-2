@@ -1,10 +1,12 @@
 import { BoardTable } from "./features/board/BoardTable";
+import UI from "./ui/UI";
 
 function App() {
 	return (
 		<div className="app">
-			<h1>I&apos;m basic app 2</h1>
 			<BoardTable />
+			{/* <StyledUI /> */}
+			<UI />
 		</div>
 	);
 }
