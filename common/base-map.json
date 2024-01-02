@@ -1,0 +1,79 @@
+{
+	"settings": {
+		"row-width": 5
+	},
+	"rows": [
+		{
+			"tiles": [
+				{
+					"land-type": "grasslands",
+					"resource-type": "coal"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "iron"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "coal"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "none"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "iron"
+				}
+			]
+		},
+		{
+			"tiles": [
+				{
+					"land-type": "grasslands",
+					"resource-type": "none"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "none"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "coal"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "none"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "iron"
+				}
+			]
+		},
+		{
+			"tiles": [
+				{
+					"land-type": "grasslands",
+					"resource-type": "none"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "none"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "coal"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "none"
+				},
+				{
+					"land-type": "grasslands",
+					"resource-type": "coal"
+				}
+			]
+		}
+	]
+}

@@ -1,16 +1,33 @@
-// import { useAppSelector, useAppDispatch } from "../../hooks";
-// import { add } from "./boardSlice";
+import styled from "styled-components";
 
 //after colon it is typing of the object
-export function BoardTile({ landType }: { landType: string }) {
-	// The `state` arg is correctly typed as `RootState` already
-	// const tile = useAppSelector((state) => state.board.tiles[2]);
-	// const dispatch = useAppDispatch();
-
+export function UnstyledBoardTile({
+	className,
+	landType,
+	resourceType,
+}: {
+	className?: string;
+	landType: string;
+	resourceType: string;
+}) {
 	return (
-		<div>
-			{/* <button onClick={() => dispatch(add())}>Increment</button> */}
-			<span>{landType}</span>
+		<div className={className}>
+			<span>land: {landType}</span>
+			<span>resource: {resourceType}</span>
 		</div>
 	);
 }
+export const BoardTile = styled(UnstyledBoardTile)`
+	width: 6rem;
+	height: 6rem;
+	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+	background-color: #6c6;
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	// margin-left: 3rem;
+	span {
+		display: block;
+	}
+`;
