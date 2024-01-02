@@ -1,0 +1,17 @@
+[
+	{
+		"name": "coal-quarry",
+		"prettyName": "Coal Quarry",
+		"category": "excavation"
+	},
+	{
+		"name": "iron-mine",
+		"prettyName": "Iron Mine",
+		"category": "excavation"
+	},
+	{
+		"name": "steel-foundry",
+		"prettyName": "Steel Foundry",
+		"category": "processing"
+	}
+]

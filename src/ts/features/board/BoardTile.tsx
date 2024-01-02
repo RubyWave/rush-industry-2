@@ -1,19 +1,36 @@
 import styled from "styled-components";
+import { returnSelectedBuildingType } from "../buildings/BuildingsTypes";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { SingleTile, addBuildingToTile } from "./boardSlice";
 
 //after colon it is typing of the object
 export function UnstyledBoardTile({
 	className,
-	landType,
-	resourceType,
+	tileItself,
 }: {
 	className?: string;
-	landType: string;
-	resourceType: string;
+	tileItself: SingleTile;
 }) {
+	const buildingTypes = useAppSelector((state) => state.buildingTypes);
+	const dispatch = useAppDispatch();
+
+	function handleClick() {
+		const selectedBuildingType =
+			returnSelectedBuildingType(buildingTypes) + "";
+		if (selectedBuildingType === "-1")
+			return; //in case no building is selected
+		else {
+			dispatch(
+				addBuildingToTile({
+					tileID: tileItself.id,
+					buildingSlug: selectedBuildingType,
+				}),
+			);
+		}
+	}
 	return (
-		<div className={className}>
-			<span>land: {landType}</span>
-			<span>resource: {resourceType}</span>
+		<div className={className} onClick={handleClick}>
+			{tileItself.building}
 		</div>
 	);
 }
@@ -25,6 +42,7 @@ export const BoardTile = styled(UnstyledBoardTile)`
 	position: relative;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	flex-direction: column;
 	// margin-left: 3rem;
 	span {

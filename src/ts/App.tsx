@@ -5,13 +5,16 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import readKeyInputs from "./features/inputs/read-keys-inputs";
 import { createNewMap } from "./features/board/boardSlice";
+import { loadBuildingTypes } from "./features/buildings/BuildingsTypes";
 
 function App() {
 	const gameStates = useAppSelector((state) => state.gameStates);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
+		//load data from common folder
 		dispatch(createNewMap());
+		dispatch(loadBuildingTypes());
 
 		const eventFunHandler = readKeyInputs(gameStates, dispatch);
 		const loopID = theGameLoop(gameStates, dispatch);

@@ -9,11 +9,7 @@ function UnstyledBoardTable({ className }: { className?: string }) {
 			{rows.map((row) => (
 				<div className="map-row" key={row.id}>
 					{row.tiles.map((tile) => (
-						<BoardTile
-							key={tile.id}
-							landType={tile.landType}
-							resourceType={tile.resourceType}
-						/>
+						<BoardTile key={tile.id} tileItself={tile} />
 					))}
 				</div>
 			))}
