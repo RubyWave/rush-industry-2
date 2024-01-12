@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { returnSelectedBuildingType } from "../buildings/BuildingsTypes";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { SingleTile, addBuildingToTile } from "./boardSlice";
 
@@ -11,26 +10,26 @@ export function UnstyledBoardTile({
 	className?: string;
 	tileItself: SingleTile;
 }) {
-	const buildingTypes = useAppSelector((state) => state.buildingTypes);
 	const dispatch = useAppDispatch();
+	const gameStates = useAppSelector((state) => state.gameStates);
 
 	function handleClick() {
-		const selectedBuildingType =
-			returnSelectedBuildingType(buildingTypes) + "";
-		if (selectedBuildingType === "-1")
-			return; //in case no building is selected
-		else {
+		const selectedBuildingType = structuredClone(
+			gameStates.selectedBuildingToBuild,
+		); //deep copy to not clear it when changing selected building throughn UI
+
+		if (selectedBuildingType) {
 			dispatch(
 				addBuildingToTile({
 					tileID: tileItself.id,
-					buildingSlug: selectedBuildingType,
+					buildingToBuild: selectedBuildingType,
 				}),
 			);
 		}
 	}
 	return (
 		<div className={className} onClick={handleClick}>
-			{tileItself.building}
+			{tileItself.building ? tileItself.building.prettyName : ""}
 		</div>
 	);
 }
@@ -43,6 +42,7 @@ export const BoardTile = styled(UnstyledBoardTile)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 	flex-direction: column;
 	// margin-left: 3rem;
 	span {

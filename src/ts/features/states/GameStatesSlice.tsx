@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import resourcesTable, { SingleResourceType } from "../resources/Resources";
 import settings from "../../../../common/game-settings.json";
+import { SingleBuildingType } from "../buildings/BuildingsTypes";
 
 interface RecourceInStockpile {
 	resource: SingleResourceType; //type of resource
@@ -17,8 +18,9 @@ interface GameStates {
 		roundTime: number; //in seconds
 		targetFPS: number; //in frames per seconds
 	};
-	stockpile: Array<RecourceInStockpile>; //array of all resources player currently owns and their count
+	stockpile: Array<RecourceInStockpile>; //array of all resources player curently owns and their count
 	cash: number; //curent amount of player's cash
+	selectedBuildingToBuild?: Partial<SingleBuildingType>; //curently selected building, to be build, if empty, no building is selected
 }
 
 // Define the initial state using that type
@@ -56,11 +58,30 @@ export const GameStatesSlice = createSlice({
 		updateTime: (state, action: PayloadAction<number>) => {
 			state.time = action.payload;
 		},
+		changeSelectedBuildingToBuild: (
+			state,
+			action: PayloadAction<{
+				buildingType: Partial<SingleBuildingType>;
+				gameStates: GameStates;
+			}>,
+		) => {
+			if (
+				action.payload.gameStates.selectedBuildingToBuild ===
+				action.payload.buildingType
+			)
+				delete state.selectedBuildingToBuild;
+			else state.selectedBuildingToBuild = action.payload.buildingType;
+		},
 	},
 });
 
-export const { startTheGame, endTheGame, pauseResumeTheGame, updateTime } =
-	GameStatesSlice.actions;
+export const {
+	startTheGame,
+	endTheGame,
+	pauseResumeTheGame,
+	updateTime,
+	changeSelectedBuildingToBuild,
+} = GameStatesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectGameStates = (state: RootState) => state.gameStates;

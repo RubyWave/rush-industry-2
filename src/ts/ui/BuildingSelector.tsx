@@ -1,22 +1,33 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styled, { css } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { SingleBuildingType } from "../features/buildings/BuildingsTypes";
-import { selectSpecificType } from "../features/buildings/BuildingsTypes";
+import {
+	SingleBuildingType,
+	buildingTypes,
+} from "../features/buildings/BuildingsTypes";
+import { changeSelectedBuildingToBuild } from "../features/states/GameStatesSlice";
 
 function SingleBuildingSelector({
 	singleType,
 }: {
 	singleType?: SingleBuildingType;
 }) {
+	const gameStates = useAppSelector((state) => state.gameStates);
+	const ifSelected = gameStates.selectedBuildingToBuild;
+
 	const dispatch = useAppDispatch();
 	function handleClick() {
-		dispatch(selectSpecificType(singleType.name));
+		dispatch(
+			changeSelectedBuildingToBuild({
+				buildingType: singleType,
+				gameStates: gameStates,
+			}),
+		);
 	}
 	return (
 		<div
 			className={
-				"single-type " + (singleType.ifSelected ? "selected" : "")
+				"single-type " + (ifSelected === singleType ? "selected" : "")
 			}
 			onClick={handleClick}
 		>
@@ -30,8 +41,6 @@ const UnstyledBuildingSelector = function ({
 }: {
 	className?: string;
 }) {
-	const buildingTypes = useAppSelector((state) => state.buildingTypes);
-
 	return (
 		<div className={className}>
 			{buildingTypes.map((singleType) => (

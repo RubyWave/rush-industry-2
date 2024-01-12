@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import boardReducer from "./features/board/boardSlice";
 import gameStatesReducer from "./features/states/GameStatesSlice";
-import buildingTypesReducer from "./features/buildings/BuildingsTypes";
 
 export const store = configureStore({
 	reducer: {
 		board: boardReducer,
 		gameStates: gameStatesReducer,
-		buildingTypes: buildingTypesReducer,
 	},
 });
 
