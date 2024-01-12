@@ -68,3 +68,5 @@ export const { addBuildingToTile } = boardSlice.actions;
 export const selectBoard = (state: RootState) => state.board.rows;
 
 export default boardSlice.reducer;
+
+export type { BoardState };

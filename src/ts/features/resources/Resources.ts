@@ -16,5 +16,14 @@ const resourcesTable: Resources = Array.from(resources, (singleResource) => {
 	};
 });
 
+/**
+ * This return deep copy of single resource from given slug
+ */
+export function resourceFromSlug(slug: string): SingleResourceType {
+	for (const singleResourceType of resourcesTable) {
+		if (singleResourceType.name === slug)
+			return structuredClone(singleResourceType);
+	}
+}
 export default resourcesTable;
 export type { SingleResourceType };

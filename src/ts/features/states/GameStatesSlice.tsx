@@ -3,6 +3,7 @@ import { RootState } from "../../store";
 import resourcesTable, { SingleResourceType } from "../resources/Resources";
 import settings from "../../../../common/game-settings.json";
 import { SingleBuildingType } from "../buildings/BuildingsTypes";
+import equal from "fast-deep-equal";
 
 interface RecourceInStockpile {
 	resource: SingleResourceType; //type of resource
@@ -66,11 +67,28 @@ export const GameStatesSlice = createSlice({
 			}>,
 		) => {
 			if (
-				action.payload.gameStates.selectedBuildingToBuild ===
-				action.payload.buildingType
+				equal(
+					action.payload.gameStates.selectedBuildingToBuild,
+					action.payload.buildingType,
+				)
 			)
 				delete state.selectedBuildingToBuild;
 			else state.selectedBuildingToBuild = action.payload.buildingType;
+		},
+		updateStockpile: (
+			state,
+			action: PayloadAction<{
+				resourceSlug: string;
+				changeValue: number;
+			}>,
+		) => {
+			for (const singleResource of state.stockpile) {
+				if (
+					singleResource.resource.name === action.payload.resourceSlug
+				)
+					singleResource.count =
+						singleResource.count + action.payload.changeValue;
+			}
 		},
 	},
 });
@@ -81,6 +99,7 @@ export const {
 	pauseResumeTheGame,
 	updateTime,
 	changeSelectedBuildingToBuild,
+	updateStockpile,
 } = GameStatesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

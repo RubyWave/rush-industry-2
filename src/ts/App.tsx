@@ -7,11 +7,12 @@ import readKeyInputs from "./features/inputs/read-keys-inputs";
 
 function App() {
 	const gameStates = useAppSelector((state) => state.gameStates);
+	const boardTable = useAppSelector((state) => state.board);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		const eventFunHandler = readKeyInputs(gameStates, dispatch);
-		const loopID = theGameLoop(gameStates, dispatch);
+		const loopID = theGameLoop(gameStates, dispatch, boardTable);
 		//clears game loop, coz useEffect is called twice in development mode
 		return () => {
 			clearInterval(loopID);

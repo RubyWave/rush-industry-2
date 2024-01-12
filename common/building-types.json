@@ -2,16 +2,46 @@
 	{
 		"name": "coal-quarry",
 		"prettyName": "Coal Quarry",
-		"category": "excavation"
+		"category": "excavation",
+		"inputs": [],
+		"outputs": [
+			{
+				"resource": "coal",
+				"count": 10
+			}
+		]
 	},
 	{
 		"name": "iron-mine",
 		"prettyName": "Iron Mine",
-		"category": "excavation"
+		"category": "excavation",
+		"inputs": [],
+		"outputs": [
+			{
+				"resource": "iron",
+				"count": 8
+			}
+		]
 	},
 	{
 		"name": "steel-foundry",
 		"prettyName": "Steel Foundry",
-		"category": "processing"
+		"category": "processing",
+		"inputs": [
+			{
+				"resource": "coal",
+				"count": 3
+			},
+			{
+				"resource": "iron",
+				"count": 8
+			}
+		],
+		"outputs": [
+			{
+				"resource": "steel",
+				"count": 11
+			}
+		]
 	}
 ]
