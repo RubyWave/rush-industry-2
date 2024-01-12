@@ -1,0 +1,17 @@
+[
+	{
+		"name": "coal",
+		"prettyName": "Coal",
+		"baseValue": 10
+	},
+	{
+		"name": "iron",
+		"prettyName": "Iron",
+		"baseValue": 12
+	},
+	{
+		"name": "steel",
+		"prettyName": "Steel",
+		"baseValue": 18
+	}
+]

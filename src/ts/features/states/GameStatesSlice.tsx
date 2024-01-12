@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import resourcesTable, { SingleResourceType } from "../resources/Resources";
 import settings from "../../../../common/game-settings.json";
+
+interface RecourceInStockpile {
+	resource: SingleResourceType; //type of resource
+	count: number; //number of resource in stockpile
+}
 
 // Define a type for the slice state
 interface GameStates {
@@ -11,6 +17,8 @@ interface GameStates {
 		roundTime: number; //in seconds
 		targetFPS: number; //in frames per seconds
 	};
+	stockpile: Array<RecourceInStockpile>; //array of all resources player currently owns and their count
+	cash: number; //curent amount of player's cash
 }
 
 // Define the initial state using that type
@@ -21,6 +29,14 @@ const initialState: GameStates = {
 		roundTime: settings["round-time-in-seconds"],
 		targetFPS: settings["desired-fps"],
 	},
+	stockpile: Array.from(resourcesTable, (singleResource) => {
+		const temp: RecourceInStockpile = {
+			resource: singleResource,
+			count: 0,
+		};
+		return temp;
+	}),
+	cash: 0,
 };
 
 export const GameStatesSlice = createSlice({

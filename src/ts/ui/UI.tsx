@@ -2,12 +2,14 @@
 import styled, { css } from "styled-components";
 import Timer from "./Timer";
 import BuildingSelector from "./BuildingSelector";
+import Stockpile from "./Stockpile";
 
 const UnstyledUI = function ({ className }: { className?: string }) {
 	return (
 		<div className={className}>
 			<Timer />
 			<BuildingSelector />
+			<Stockpile />
 		</div>
 	);
 };
