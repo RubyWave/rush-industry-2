@@ -15,7 +15,7 @@ export function UnstyledBoardTile({
 
 	function handleClick() {
 		const selectedBuildingType = structuredClone(
-			gameStates.selectedBuildingToBuild,
+			gameStates.selectedBuildingToBuild, //TODO: check if this deep copy is for more levels then one
 		); //deep copy to not clear it when changing selected building throughn UI
 
 		if (selectedBuildingType) {

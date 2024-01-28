@@ -15,6 +15,17 @@ interface SingleBuildingType {
 		count: number; //units per second
 		resource: SingleResourceType;
 	}>;
+	throughput: {
+		//multiplicative modifier for input and output
+		inputs: {
+			base: 1; //base muliplier, should always be 1
+			inputsModifier: number; //depends on % of input resources avaiable, must be between 0-1
+		};
+		outputs: {
+			base: 1; //base muliplier, should always be 1
+			inputsModifier: number; //depends on % of input resources avaiable, must be between 0-1
+		};
+	};
 }
 interface BuildingTypes extends Array<SingleBuildingType> {}
 
@@ -38,6 +49,16 @@ export const buildingTypes: BuildingTypes = Array.from(
 					resource: resourceFromSlug(singleOutput.resource),
 				};
 			}),
+			throughput: {
+				inputs: {
+					base: 1,
+					inputsModifier: 1,
+				},
+				outputs: {
+					base: 1,
+					inputsModifier: 1,
+				},
+			},
 		};
 	},
 );

@@ -5,10 +5,12 @@ import settings from "../../../../common/game-settings.json";
 import { SingleBuildingType } from "../buildings/BuildingsTypes";
 import equal from "fast-deep-equal";
 
-interface RecourceInStockpile {
+export interface RecourceInStockpile {
 	resource: SingleResourceType; //type of resource
 	count: number; //number of resource in stockpile
 }
+
+interface Stockpile extends Array<RecourceInStockpile> {}
 
 // Define a type for the slice state
 interface GameStates {
@@ -19,7 +21,7 @@ interface GameStates {
 		roundTime: number; //in seconds
 		targetFPS: number; //in frames per seconds
 	};
-	stockpile: Array<RecourceInStockpile>; //array of all resources player curently owns and their count
+	stockpile: Stockpile; //array of all resources player curently owns and their count
 	cash: number; //curent amount of player's cash
 	selectedBuildingToBuild?: Partial<SingleBuildingType>; //curently selected building, to be build, if empty, no building is selected
 }
@@ -90,6 +92,14 @@ export const GameStatesSlice = createSlice({
 						singleResource.count + action.payload.changeValue;
 			}
 		},
+		updateWholeStockpile: (
+			state,
+			action: PayloadAction<{
+				newStockpile: Stockpile;
+			}>,
+		) => {
+			state.stockpile = action.payload.newStockpile;
+		},
 	},
 });
 
@@ -100,6 +110,7 @@ export const {
 	updateTime,
 	changeSelectedBuildingToBuild,
 	updateStockpile,
+	updateWholeStockpile,
 } = GameStatesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

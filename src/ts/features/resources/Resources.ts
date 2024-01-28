@@ -22,7 +22,7 @@ const resourcesTable: Resources = Array.from(resources, (singleResource) => {
 export function resourceFromSlug(slug: string): SingleResourceType {
 	for (const singleResourceType of resourcesTable) {
 		if (singleResourceType.name === slug)
-			return structuredClone(singleResourceType);
+			return structuredClone(singleResourceType); //TODO: check if this deep copy is for more levels then one
 	}
 }
 export default resourcesTable;
