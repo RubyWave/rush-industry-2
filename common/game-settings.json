@@ -1,4 +1,5 @@
 {
-	"round-time-in-seconds": 45,
-	"desired-fps": 2
+	"round-time-in-seconds": 30,
+	"desired-fps": 2,
+	"starting-cash": 500
 }

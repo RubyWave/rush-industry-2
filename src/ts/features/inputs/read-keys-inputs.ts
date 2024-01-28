@@ -1,6 +1,7 @@
 import {
 	GameStates,
 	pauseResumeTheGame,
+	sellStockpile,
 	startTheGame,
 } from "../states/GameStatesSlice";
 import { Dispatch } from "redux";
@@ -24,6 +25,22 @@ function readKeyInputs(gameStates: GameStates, dispatch: Dispatch) {
 					case "running":
 					case "paused":
 						dispatch(pauseResumeTheGame());
+						break;
+					case "ended":
+						break;
+				}
+				break;
+			case "s":
+				switch (gameStates.theState) {
+					case "pre-start":
+						break;
+					case "running":
+					case "paused":
+						dispatch(
+							sellStockpile({
+								sellPercentage: 0.5,
+							}),
+						);
 						break;
 					case "ended":
 						break;

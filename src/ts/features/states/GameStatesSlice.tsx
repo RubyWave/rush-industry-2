@@ -41,9 +41,10 @@ const initialState: GameStates = {
 		};
 		return temp;
 	}),
-	cash: 0,
+	cash: settings["starting-cash"],
 };
 
+//TODO: those functions in reducer should be cleared somehow, it is getting crowdy here
 export const GameStatesSlice = createSlice({
 	name: "gameStates",
 	initialState,
@@ -60,6 +61,9 @@ export const GameStatesSlice = createSlice({
 		},
 		updateTime: (state, action: PayloadAction<number>) => {
 			state.time = action.payload;
+		},
+		updateCash: (state, action: PayloadAction<number>) => {
+			state.cash = action.payload;
 		},
 		changeSelectedBuildingToBuild: (
 			state,
@@ -100,6 +104,24 @@ export const GameStatesSlice = createSlice({
 		) => {
 			state.stockpile = action.payload.newStockpile;
 		},
+		sellStockpile: (
+			state,
+			action: PayloadAction<{
+				sellPercentage: number; //in range of 0-1
+			}>,
+		) => {
+			state.stockpile.forEach((singleResource) => {
+				if (singleResource.count < 1) return; //won't sell stuff if count lower then 1; it is for not splitting units almost idenfientely
+				//TODO: do something about ugly roundings
+				const amountToSell = +(
+					singleResource.count * action.payload.sellPercentage
+				).toFixed(2);
+				singleResource.count = singleResource.count - amountToSell;
+				const cashAmount =
+					amountToSell * singleResource.resource.baseValue;
+				state.cash += +cashAmount.toFixed(2);
+			});
+		},
 	},
 });
 
@@ -108,9 +130,11 @@ export const {
 	endTheGame,
 	pauseResumeTheGame,
 	updateTime,
+	updateCash,
 	changeSelectedBuildingToBuild,
 	updateStockpile,
 	updateWholeStockpile,
+	sellStockpile,
 } = GameStatesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type

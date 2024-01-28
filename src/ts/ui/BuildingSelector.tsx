@@ -14,6 +14,9 @@ function SingleBuildingSelector({
 }) {
 	const gameStates = useAppSelector((state) => state.gameStates);
 	const ifSelected = gameStates.selectedBuildingToBuild;
+	let buyable: boolean;
+	if (gameStates.cash > singleType.cost) buyable = true;
+	else buyable = false;
 
 	const dispatch = useAppDispatch();
 	function handleClick() {
@@ -31,7 +34,32 @@ function SingleBuildingSelector({
 			}
 			onClick={handleClick}
 		>
-			<span>{singleType.prettyName}</span>
+			<span
+				className={
+					"building-name " + (buyable ? "buyable" : "not-buyable")
+				}
+			>
+				{singleType.prettyName}
+			</span>
+			<span>cost: {singleType.cost}€</span>
+			<div className="inputs">
+				<span>Inputs:</span>
+				{singleType.inputs.map((singleResource, i) => (
+					<span className="single-inputoutput" key={i}>
+						{singleResource.count}{" "}
+						{singleResource.resource.prettyName}
+					</span>
+				))}
+			</div>
+			<div className="outputs">
+				<span>Outputs:</span>
+				{singleType.outputs.map((singleResource, i) => (
+					<span className="single-inputoutput" key={i}>
+						{singleResource.count}{" "}
+						{singleResource.resource.prettyName}
+					</span>
+				))}
+			</div>
 		</div>
 	);
 }
@@ -70,6 +98,28 @@ const BuildingSelector = styled(UnstyledBuildingSelector)`
 		&.selected {
 			transform: translateY(-0.5rem);
 			box-shadow: 0px 0px 5px red;
+		}
+		span {
+			display: block;
+			font-size: 0.875rem;
+		}
+		.building-name {
+			font-size: 1.25rem;
+			&.not-buyable {
+				color: red;
+			}
+		}
+		.inputs,
+		.outputs {
+			.single-inputoutput {
+				margin-left: 0.375rem;
+			}
+		}
+		.inputs {
+			color: brown;
+		}
+		.outputs {
+			color: green;
 		}
 	}
 `;

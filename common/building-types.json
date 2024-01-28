@@ -3,6 +3,7 @@
 		"name": "coal-quarry",
 		"prettyName": "Coal Quarry",
 		"category": "excavation",
+		"cost": 150,
 		"inputs": [],
 		"outputs": [
 			{
@@ -16,6 +17,7 @@
 		"prettyName": "Iron Mine",
 		"category": "excavation",
 		"inputs": [],
+		"cost": 180,
 		"outputs": [
 			{
 				"resource": "iron",
@@ -27,6 +29,7 @@
 		"name": "steel-foundry",
 		"prettyName": "Steel Foundry",
 		"category": "processing",
+		"cost": 350,
 		"inputs": [
 			{
 				"resource": "coal",

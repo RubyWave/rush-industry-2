@@ -8,18 +8,23 @@ function UnstyledSingleResourceDisplayer({
 	singleResource,
 	count,
 	resourceName,
+	extraSign,
 }: {
 	className?: string;
 	singleResource?: SingleResourceType;
 	count: number;
 	resourceName?: string;
+	extraSign?: string;
 }) {
 	return (
 		<div className={className}>
 			<span>
-				{singleResource ? singleResource.prettyName : resourceName}:
+				{+count.toFixed(2)}
+				{extraSign ? extraSign : ""}
 			</span>
-			<span>{count}</span>
+			<span>
+				{singleResource ? singleResource.prettyName : resourceName}
+			</span>
 		</div>
 	);
 }
@@ -28,6 +33,10 @@ const SingleResourceDisplayer = styled(UnstyledSingleResourceDisplayer)`
 	display: flex;
 	gap: 0.75rem;
 	justify-content: space-between;
+	&.cash-resource {
+		font-size: 2.125rem;
+		color: red;
+	}
 `;
 
 const UnstyledStockpile = function ({ className }: { className?: string }) {
@@ -45,6 +54,8 @@ const UnstyledStockpile = function ({ className }: { className?: string }) {
 			<SingleResourceDisplayer
 				count={gameStates.cash}
 				resourceName={"Cash"}
+				className={"cash-resource"}
+				extraSign={"€"}
 			/>
 		</div>
 	);

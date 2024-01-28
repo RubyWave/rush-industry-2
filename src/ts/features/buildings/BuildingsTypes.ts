@@ -5,6 +5,7 @@ interface SingleBuildingType {
 	name: string; //slugify name, this needs to be unique
 	prettyName: string; //displayable name
 	category: string; //TODO: make categories its own type as well
+	cost: number; //cost in cash to build building
 	inputs: Array<{
 		//resources that are consumed by buildig
 		count: number; //units per second
@@ -37,6 +38,7 @@ export const buildingTypes: BuildingTypes = Array.from(
 			name: singleType.name,
 			prettyName: singleType.prettyName,
 			category: singleType.category,
+			cost: singleType.cost,
 			inputs: Array.from(singleType.inputs, (singleInput) => {
 				return {
 					count: singleInput.count,

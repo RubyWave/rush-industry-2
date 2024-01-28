@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import Timer from "./Timer";
 import BuildingSelector from "./BuildingSelector";
 import Stockpile from "./Stockpile";
+import SellButton from "./SellButton";
 
 const UnstyledUI = function ({ className }: { className?: string }) {
 	return (
@@ -10,6 +11,7 @@ const UnstyledUI = function ({ className }: { className?: string }) {
 			<Timer />
 			<BuildingSelector />
 			<Stockpile />
+			<SellButton />
 		</div>
 	);
 };

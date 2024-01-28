@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { SingleTile, addBuildingToTile } from "./boardSlice";
+import { updateCash } from "../states/GameStatesSlice";
 
 //after colon it is typing of the object
 export function UnstyledBoardTile({
@@ -18,7 +19,11 @@ export function UnstyledBoardTile({
 			gameStates.selectedBuildingToBuild, //TODO: check if this deep copy is for more levels then one
 		); //deep copy to not clear it when changing selected building throughn UI
 
-		if (selectedBuildingType) {
+		if (
+			selectedBuildingType &&
+			gameStates.cash > selectedBuildingType.cost //checks if one can afford building
+		) {
+			dispatch(updateCash(gameStates.cash - selectedBuildingType.cost));
 			dispatch(
 				addBuildingToTile({
 					tileID: tileItself.id,

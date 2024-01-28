@@ -9,7 +9,7 @@ const UnstyledTimer = function ({ className }: { className?: string }) {
 		<div className={className}>
 			<span>Time: {Math.floor(gameStates.time)}</span>
 			<span>Round Time: {gameStates.settings.roundTime}</span>
-			<span>Game state: {gameStates.theState}</span>
+			<span>Game state: {gameStates.theState} (space)</span>
 		</div>
 	);
 };
